@@ -9,7 +9,7 @@ global varIngHog ingTotal ingRent ingAyuFam ingPenDivo ingAgro ingNoAgro ingMFAp
 *global varPobreza pobreza pobreza_extrema IPMgeneral pcan 
 global varAct valActHog valActEspPe valActEspGra valActPro valActIn implementos_cuanto
 global  c08_productos_agricolas c019_productos_pecuarios  c38_huerta
-*global varProduc2 canAgriHo canAgriHoLi canPerHo canPerHoLi canPerHoAv canPerHoCe canPerHoHu canPerHoGa canOcHo canOcHoLi canOcHoAv canOcHoCe canOcHoHu canOcHoGa 
+*global varProduc varProduc2 canAgriHo canAgriHoLi canPerHo canPerHoLi canPerHoAv canPerHoCe canPerHoHu canPerHoGa canOcHo canOcHoLi canOcHoAv canOcHoCe canOcHoHu canOcHoGa 
 global varSegAli escInsegAli seguridadMenor seguridadNiño seguridadMenoryNiño seguridadHogar seguridadAdulto gastAlimenAuto punELCSA_1 punELCSA_2 punELCSA_3 punELCSA_4
 *global varSegAli2 j1_alimentos_preocupacion j2_sin_alimentos j3_alimentacion_saludable j4_variedad_alimentos j5_dejar_comida j6_comio_menos_debia j7_hambre_no_comio j8_comer_una_vez_o_no j9_pedir_limosna j11_menor_saludable j12_menor_variedad j13_menor_comida j14_menor_comio_debia j15_menor_cantidad_comida j16_menor_hambre j17_menor_comio_una_o_no nutrMen5 sinComMen5
 global varAhorroCred ahorPreFormal presenInformal credPreFormal credPreInformal
@@ -28,6 +28,8 @@ label var programas2 "Número de programas por hogar excluyendo FEST"
 label var programas4 "Número de programas por hogar excluyendo FEST y Red UNIDOS"
 }
 /*********************************************Regresiones********************************************************/
+**miremos a ver**
+
 {
 /*******************************Original************************************************/
 {
