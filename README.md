@@ -1,8 +1,11 @@
 # FEST
-Evaluación de resultados de FEST
+Evaluación de resultados de FEST{
+
 	cd "C:\Users\a.romero11\OneDrive\CEDE\Evaluación Resultados FEST\"
 	*cd "C:\Users\andre\OneDrive\CEDE\Evaluación Resultados FEST\"
 	use "Encuesta Hogares Colombia FINAL hog+per_sisben_180219", clear
+	}
+	
 **GLOBALS**
 	global varTrabajo horasTotales horasSecu horasPrin 
 	global varIngHog ingTotal ingRent ingAyuFam ingPenDivo ingAgro ingNoAgro ingMFApam ingOtros
