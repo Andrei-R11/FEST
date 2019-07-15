@@ -1,12 +1,13 @@
 # FEST
-Evaluación de resultados de FEST{
+Evaluación de resultados de FEST
 
 	cd "C:\Users\a.romero11\OneDrive\CEDE\Evaluación Resultados FEST\"
 	*cd "C:\Users\andre\OneDrive\CEDE\Evaluación Resultados FEST\"
 	use "Encuesta Hogares Colombia FINAL hog+per_sisben_180219", clear
-	}
+	
 	
 **GLOBALS**
+
 	global varTrabajo horasTotales horasSecu horasPrin 
 	global varIngHog ingTotal ingRent ingAyuFam ingPenDivo ingAgro ingNoAgro ingMFApam ingOtros
 	*global varPobreza pobreza pobreza_extrema IPMgeneral pcan 
@@ -25,57 +26,63 @@ Evaluación de resultados de FEST{
 	global varAspyExp2 agencia locInter locPow locChance
 	global varCapSocial ssc1 ssc2 ssc3 ssc4 SSC csc1 csc2 CSC m7_proyectos_comunitarios m9_participo_proyecto
 	*global varUNIDOS  estudioPromedioHogar e25_problema_salud programas privacion7 privacion3 preMejorHo
+	
 *Variables progrmas*
-label var programas "Número de programas por hogar excluyendo FeA, FEST y Red UNIDOS"
-label var programas2 "Número de programas por hogar excluyendo FEST"
-label var programas4 "Número de programas por hogar excluyendo FEST y Red UNIDOS"
+
+	label var programas "Número de programas por hogar excluyendo FeA, FEST y Red UNIDOS"
+	label var programas2 "Número de programas por hogar excluyendo FEST"
+	label var programas4 "Número de programas por hogar excluyendo FEST y Red UNIDOS"
 
 **EVALUACIÓN FEST VS NO FEST**
-set seed 72049123
-	foreach Z in varTrabajo varIngHog varAct varProduc varSegAli varAhorroCred varValAhoCred varEmpod varAspyExp varAspyExp2 varCapSocial{
-	foreach var of global `Z' {  
+
+	set seed 72049123
+		foreach Z in varTrabajo varIngHog varAct varProduc varSegAli varAhorroCred varValAhoCred varEmpod varAspyExp varAspyExp2 varCapSocial{
+		foreach var of global `Z' {  
 
 	cap noi bootstrap r(att), reps(150): psmatch2 D PUNTAJEsisben IPMgeneral sexo_jefe programas2  gastAlimen2 tenencia1 region, ///
 		outcome(`var') kernel com
 	matrix tabla = r(table)
 	local pvalue = tabla[4,1]
 	outreg2 using "Bootstrap\Bgeneral_150rep_personas.xls", addstat("p-value",`pvalue',"Observations",e(N)) ctitle("`var'")
-}
-}
+	}
+	}
 **EVALUACIÓN Y_fest|u=0**
-set seed 72049123
-	foreach Z in varTrabajo varIngHog varAct varProduc varSegAli varAhorroCred varValAhoCred varEmpod varAspyExp varAspyExp2 varCapSocial{
-	foreach var of global `Z' {  
 
-	cap noi bootstrap r(att), reps(150): psmatch2 Y_fest PUNTAJEsisben IPMgeneral sexo_jefe gastAlimen2  programas4 region tenencia1, ///
-		outcome(`var') kernel com
-	matrix tabla = r(table)
-	local pvalue = tabla[4,1]
-	outreg2 using "Bootstrap\Y_FEST_U_0_150rep_personas.xls", addstat("p-value",`pvalue',"Observations",e(N)) ctitle("`var'")
-}
-}
+	set seed 72049123
+		foreach Z in varTrabajo varIngHog varAct varProduc varSegAli varAhorroCred varValAhoCred varEmpod varAspyExp varAspyExp2 varCapSocial{
+		foreach var of global `Z' {  
+
+		cap noi bootstrap r(att), reps(150): psmatch2 Y_fest PUNTAJEsisben IPMgeneral sexo_jefe gastAlimen2  programas4 region tenencia1, ///
+			outcome(`var') kernel com
+		matrix tabla = r(table)
+		local pvalue = tabla[4,1]
+		outreg2 using "Bootstrap\Y_FEST_U_0_150rep_personas.xls", addstat("p-value",`pvalue',"Observations",e(N)) ctitle("`var'")
+	}
+	}
 **EVALUACIÓN Y_unidos| fest=0**
-set seed 72049123
-	foreach Z in varTrabajo varIngHog varAct varProduc varSegAli varAhorroCred varValAhoCred varEmpod varAspyExp varAspyExp2 varCapSocial{
-	foreach var of global `Z' {  
 
-	cap noi bootstrap r(att), reps(150): psmatch2 Y_unidos PUNTAJEsisben IPMgeneral programas4  edad_jefe arHo tenencia1 porcenReubi region, ///
-		outcome(`var') kernel com
-	matrix tabla = r(table)
-	local pvalue = tabla[4,1]
-	outreg2 using "Bootstrap\Y_UNIDOS_FEST_0_150rep_personas.xls", addstat("p-value",`pvalue',"Observations",e(N)) ctitle("`var'")
-}
-}
+	set seed 72049123
+		foreach Z in varTrabajo varIngHog varAct varProduc varSegAli varAhorroCred varValAhoCred varEmpod varAspyExp varAspyExp2 varCapSocial{
+		foreach var of global `Z' {  
+
+		cap noi bootstrap r(att), reps(150): psmatch2 Y_unidos PUNTAJEsisben IPMgeneral programas4  edad_jefe arHo tenencia1 porcenReubi region, ///
+			outcome(`var') kernel com
+		matrix tabla = r(table)
+		local pvalue = tabla[4,1]
+		outreg2 using "Bootstrap\Y_UNIDOS_FEST_0_150rep_personas.xls", addstat("p-value",`pvalue',"Observations",e(N)) ctitle("`var'")
+	}
+	}
 **EVUALUACIÓN Y_unidos*fest**
-set seed 72049123	
-	foreach Z in varTrabajo varIngHog varAct varProduc varSegAli varAhorroCred varValAhoCred varEmpod varAspyExp varAspyExp2 varCapSocial{
-	foreach var of global `Z' {  
 
-	cap noi bootstrap r(att), reps(150): psmatch2 Y_unidos_fest PUNTAJEsisben IPMgeneral sexo_jefe edad_jefe programas4 personas_hogar region ///
-		tenencia1 porCul , outcome(`var') kernel com
-	matrix tabla = r(table)
-	local pvalue = tabla[4,1]
-	outreg2 using "Bootstrap\Y_FEST_UNIDOS_150rep_personas.xls", addstat("p-value",`pvalue',"Observations",e(N)) ctitle("`var'")
-}
-}
-}
+	set seed 72049123	
+		foreach Z in varTrabajo varIngHog varAct varProduc varSegAli varAhorroCred varValAhoCred varEmpod varAspyExp varAspyExp2 varCapSocial{
+		foreach var of global `Z' {  
+
+		cap noi bootstrap r(att), reps(150): psmatch2 Y_unidos_fest PUNTAJEsisben IPMgeneral sexo_jefe edad_jefe programas4 personas_hogar region ///
+			tenencia1 porCul , outcome(`var') kernel com
+		matrix tabla = r(table)
+		local pvalue = tabla[4,1]
+		outreg2 using "Bootstrap\Y_FEST_UNIDOS_150rep_personas.xls", addstat("p-value",`pvalue',"Observations",e(N)) ctitle("`var'")
+	}
+	}
+	}
